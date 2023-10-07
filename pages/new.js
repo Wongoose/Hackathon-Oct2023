@@ -133,15 +133,15 @@ export default function Page() {
                             </div>
                             <div className="col-md-3 mb-3">
                                 {/* <label for="startTime" className="form-label">Start Time:</label> */}
-                                <input type="time" className="form-control" id="startTime" name="startTime" placeholder="Start Time" required/>
+                                <input type="time" className="form-control" id="startTime" name="startTime" placeholder="Start Time" required />
                             </div>
                             <div className="col-md-3 mb-3">
                                 {/* <label for="endDate" className="form-label">End Date:</label> */}
-                                <input type="date" className="form-control" id="endDate" name="endDate" placeholder="End Date" required/>
+                                <input type="date" className="form-control" id="endDate" name="endDate" placeholder="End Date" required />
                             </div>
                             <div className="col-md-3 mb-3">
                                 {/* <label for="endTime" className="form-label">End Time:</label> */}
-                                <input type="time" className="form-control" id="endTime" name="endTime" placeholder="End Time" required/>
+                                <input type="time" className="form-control" id="endTime" name="endTime" placeholder="End Time" required />
                             </div>
                         </div>
                         
@@ -204,7 +204,7 @@ export default function Page() {
                                         allowTeam && <>
                                             <div className="form-group" id="teamMembersInput">
                                                 <label for="teamMaxMembers">Max Members:</label>
-                                                <input type="number" className="form-control" id="teamMaxMembers" name="teamMaxMembers" min="1" required/>
+                                                <input type="number" className="form-control" id="teamMaxMembers" name="teamMaxMembers" min="1" required />
                                             </div>
                                             <div className="form-group" id="teamMinMembersInput">
                                                 <label for="teamMinMembers">Min Members:</label>
