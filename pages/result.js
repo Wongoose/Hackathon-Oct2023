@@ -1,19 +1,60 @@
 import UserLayout from '@/components/UserLayout';
 import { useState, useEffect } from 'react';
 
+const tempUsers = [
+    "zwong",
+    "schuah",
+    "skoh",
+    "saleem",
+    "nnorazma",
+    "hwong",
+    "jtan",
+    "jng",
+    "chenlee",
+    "helee"
+];
+
 export default function Page() {
     const [winners, setWinners] = useState([]);
-    const [participants, setparticipants] = useState([]);
+    const [participants, setparticipants] = useState([]); // currently not used, for datalist
     const [selected, setSelected] = useState();
+    const [evalPoint, setEvalPoint] = useState(0);
 
     function onSubmitSearch(event) {
         event.preventDefault();
         setSelected(event.target.elements['search'].value)
     }
 
+    function evalToggle() {
+        console.log(evalPoint);
+        evalPoint == 0 ? setEvalPoint(3) : setEvalPoint(0);
+    }
+
+    // NEXT: Add validation and use form inputs (eval points, blackhole days)
+    // NEXT: Reset
+    function addWinnerToList(event) {
+        event.preventDefault();
+        const reason = document.getElementById("reason").value;
+        setWinners([...winners, { "name": selected, "reason": reason }]);
+    }
+
     useEffect(() => {
         //participants = await fetch('/api/getparticiapintaa')
 
+        // Add dummy users in datalist
+        const rewardSearchInput = document.getElementById("reward-search");
+        rewardSearchInput.setAttribute("list", "user-datalist");
+        let dataList = document.createElement("datalist");
+        dataList.style.backgroundColor = "FFFFFF"
+        dataList.id = "user-datalist";
+
+        rewardSearchInput.append(dataList);
+
+        for (let i = 0; i < 10; i++) {
+            let addOption = document.createElement("option");
+            addOption.append(tempUsers[i]);
+            dataList.append(addOption);
+        }
     }, []);
 
 
@@ -26,47 +67,45 @@ export default function Page() {
                     <input id="reward-search" name="search" className="form-control" type="search" placeholder="Search by Intra ID..." />
                 </form>
                 {selected &&
-                    <div className="col" style={{ marginTop: "2rem", marginBottom: "1rem" }}>
+                    <form onSubmit={addWinnerToList}>
+                        <div className="col" style={{ marginTop: "2rem", marginBottom: "1rem" }}>
 
-                        <div className="row-cols-2">
-                            <h4 style={{ fontWeight: "bold" }}>Selected: </h4>
-                            <h4 style={{ fontWeight: "bold", color: "red" }}>{selected}</h4>
+                            <div className="row-cols-2">
+                                <h4 style={{ fontWeight: "bold", color: "blueviolet" }}>Selected: {selected}</h4>
+                            </div>
+                            <div className="card" style={{ padding: "15px", marginBottom: "2rem" }}>
+                                <div className="row" style={{ paddingLeft: "1rem" }}>
+                                    <input type="checkbox" name="evalPoints" checked={evalPoint != 0} style={{ color: "black" }} onClick={evalToggle} />
+                                    <p style={{ "marginLeft": "15px" }}>+ Eval points</p>
+                                </div>
+                                <div className="row" style={{ paddingLeft: "1rem" }}>
+                                    <input type="checkbox" name="bhDays" style={{ color: "black" }} />
+                                    <p style={{ marginLeft: "15px" }}>+ Blackhole days</p>
+                                </div>
+                                <div className="row" style={{ paddingLeft: "1rem" }} >
+                                    <input type="checkbox" name="currency" style={{ color: "black" }} />
+                                    <p style={{ marginLeft: "15px" }}>+ Currency ($)</p>
+                                </div>
+                                <div className="row" style={{ paddingLeft: "1rem" }}>
+                                    <input type="checkbox" name="title" style={{ color: "black" }} />
+                                    <p style={{ marginLeft: "15px" }}>+ Hackathon winner title</p>
+                                </div>
+                                <div className="form-floating mb-3" style={{ marginTop: "10px" }}>
+                                    <input type="text" className="form-control" id="reason" />
+                                    <label for="reason">Reason for reward</label>
+                                </div>
+                                <button id="reward-confirm-btn"
+                                    style={{ "width": "100%", paddingTop: "8px", paddingBottom: "8px", marginBottom: "5px" }}>Add {selected} to list</button>
+                            </div>
                         </div>
-                        <div className="card" style={{ padding: "15px", marginBottom: "2rem" }}>
-                            <div className="row" style={{ paddingLeft: "1rem" }}>
-                                <input type="checkbox" name="+ Blackhole days" value="Blackhole days" style={{ color: "black" }} />
-                                <p style={{ "marginLeft": "15px" }}>+ Eval points</p>
-                            </div>
-                            <div className="row" style={{ paddingLeft: "1rem" }}>
-                                <input type="checkbox" name="Blackhole days" value="+ Blackhole days" style={{ color: "black" }} />
-                                <p style={{ marginLeft: "15px" }}>+ Blackhole days</p>
-                            </div>
-                            <div className="row" style={{ paddingLeft: "1rem" }} >
-                                <input type="checkbox" name="Blackhole days" value="+ Blackhole days" style={{ color: "black" }} />
-                                <p style={{ marginLeft: "15px" }}>+ Currency ($)</p>
-                            </div>
-                            <div className="row" style={{ paddingLeft: "1rem" }}>
-                                <input type="checkbox" name="Blackhole days" value="+ Blackhole days" style={{ color: "black" }} />
-                                <p style={{ marginLeft: "15px" }}>+ Hackathon winner title</p>
-                            </div>
-                            <div className="form-floating mb-3" style={{ marginTop: "10px" }}>
-                                <input type="text" className="form-control" id="input-name" placeholder="SEAN CHUAH | SCHUAH" />
-                                <label for="input-name">Reason for reward</label>
-                            </div>
-                            <button id="reward-confirm-btn"
-                                style={{ "width": "100%", paddingTop: "8px", paddingBottom: "8px", marginBottom: "5px" }}>Add zwong to list</button>
-                        </div>
-                    </div>
+                    </form>
                 }
                 <h4 style={{ fontWeight: "bold" }}>Summary</h4>
                 <div className="card" style={{ padding: "15px", marginBottom: "2rem" }}>
                     {
-                        winners.length && winners.map((x, i) =>
-                            <p>{i + 1}. {x.login} (+ {x.rewards}) - {x.reason}</p>)
+                        winners.length == 0 ? <p></p> : winners.map((x, i) =>
+                            <p>{i + 1}. {x.name} ({x.rewards}) - {x.reason}</p>)
                     }
-                    <p>1. zwong (+ eval points) - 1st place winner</p>
-                    <p>2. schuah (+ blackhole days) - 2nd place winner</p>
-                    <p>3. skoh (+ currency) - Consolation prize</p>
                 </div>
                 <button id="reward-confirm-btn"
                     style={{ width: "100%", paddingTop: "8px", paddingBottom: "8px", marginBottom: "5px" }}>Confirm all rewards</button>
