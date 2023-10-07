@@ -1,17 +1,234 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <title>Bootstrap demo</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/sketchy/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-  </head>
-  <body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Registration</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.2/dist/sketchy/bootstrap.min.css">
+    <script src="https://cdn.tiny.cloud/1/pov0fuuisfpdpriwx94auezwav7nukrl7ni2w5lzbh6qufya/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+</head>
+<body>
     <div class="container">
-      <h1 style="text-align:center;">CREATE EVENT!</h1>
-      </div>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <h1 class="mt-5">Create Event</h1>
+        <form>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" placeholder="Enter Event Title">
+                <!-- <label for="floatingInput">Event Title</label> -->
+              </div>
+              <div class="mb-3">
+                <textarea class="form-control" id="Welcome" rows="3" placeholder="Welcome Intro"></textarea>
+            </div>
+            <div class="container">
+                <h2 class="mt-5">Who Can Participate:</h2>
+                <form>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" id="cadets" checked>
+                                <label class="form-check-label" for="cadets">42KL Cadets</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" id="cadetsAGU">
+                                <label class="form-check-label" for="cadetsAGU">Cadets in AGU</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" id="anyOne">
+                                <label class="form-check-label" for="anyOne">AnyOne</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" id="pisciner">
+                                <label class="form-check-label" for="pisciner">Pisciner</label>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
+                </form>
+            </div>
+            <div class="container">
+                <h2 class="mt-4">Event Details:</h2>
+                <label for="eventDate" class="form-label">Briefing Time:</label>
+                <div class="row">
+                   
+                    <div class="col-md-6 mb-3">
+                        <input type="date" class="form-control" id="eventDate" name="eventDate" placeholder="Event Date">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <input type="time" class="form-control" id="eventTime" name="eventTime" placeholder="Event Time">
+                    </div>
+                </div>
+                <label for="eventDate" class="form-label">Period</label>
+                <div class="row">
+                    
+                    <div class="col-md-3 mb-3">
+                        <!-- <label for="startDate" class="form-label">Sart</label> -->
+                        <input type="date" class="form-control" id="startDate" name="startDate" placeholder="Start Date">
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <!-- <label for="startTime" class="form-label">Start Time:</label> -->
+                        <input type="time" class="form-control" id="startTime" name="startTime" placeholder="Start Time">
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <!-- <label for="endDate" class="form-label">End Date:</label> -->
+                        <input type="date" class="form-control" id="endDate" name="endDate" placeholder="End Date">
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <!-- <label for="endTime" class="form-label">End Time:</label> -->
+                        <input type="time" class="form-control" id="endTime" name="endTime" placeholder="End Time">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <!-- <label for="eventLocation" class="form-label">Location:</label> -->
+                    <input type="text" class="form-control" id="eventLocation" placeholder="Event Location">
+                </div>
+                <div class="mb-3">
+                    <textarea class="form-control" id="eventDescription" rows="3" placeholder="Event Description:"></textarea>
+                </div>
+              Reference 
+                <div class="row">                
+                    <div class="col-md-6 mb-3">
+      
+                    <!-- <label for="eventFiles">Event Files (Upload files):</label> -->
+                    <input type="file" class="form-control" id="eventFiles" name="eventFiles" accept=".pdf, .doc, .docx, .txt" multiple>
+
+                  </div>
+                <div class="col-md-6 mb-3">
+                    <!-- <label for="eventFiles">Event Files (Upload files):</label> -->
+                    <input type="text" class="form-control" id="event" name="eventLinks">
+                </div>
+
+                </div>
+                Participance Type
+                <div class="row">
+                    <div class="col-md-6">
+                      <div class="border p-2">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="teamCheckbox" name="registrationType[]" value="Team" onchange="toggleTextboxes(this.id)">
+                          <!-- <label class="form-check-label" for="teamCheckbox"> -->
+                            Team
+                          </label>
+                        </div>
+                        <div class="form-group" id="teamMembersInput" style="display: none;">
+                          <label for="teamMaxMembers">Max Members:</label>
+                          <input type="number" class="form-control" id="teamMaxMembers" name="teamMaxMembers" required>
+                        </div>
+                        <div class="form-group" id="teamMinMembersInput" style="display: none;">
+                          <label for="teamMinMembers">Min Members:</label>
+                          <input type="number" class="form-control" id="teamMinMembers" name="teamMinMembers" required>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="border p-2">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="loneWolfCheckbox" name="registrationType[]" value="Lone Wolf">
+                          <label class="form-check-label" for="loneWolfCheckbox">
+                            Lone Wolf
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                <br/>
+                <div class="d-grid gap-6">
+                    <!-- <button class="btn btn-primary" type="button">Create Event</button> -->
+                    <button onclick="collectAndRedirect()">Create Event</button>
+                </div>
+                <br/>
+         </div>        
+        </form>
+        <script>
+          function collectAndRedirect() {
+            const selectedValues = [];
+
+            const eventTitle = document.getElementById('floatingInput').value;
+            const welcomeIntro = document.getElementById('Welcome').value;
+            const cadetsCheckbox = document.getElementById('cadets');
+            const cadetsAGUCheckbox = document.getElementById('cadetsAGU');
+            const anyOneCheckbox = document.getElementById('anyOne');
+            const piscinerCheckbox = document.getElementById('pisciner');
+            if (cadetsCheckbox.checked) {
+                selectedValues.push('42KL Cadets');
+            }
+            if (cadetsAGUCheckbox.checked) {
+                selectedValues.push('Cadets in AGU');
+            }
+            if (anyOneCheckbox.checked) {
+                selectedValues.push('AnyOne');
+            }
+            if (piscinerCheckbox.checked) {
+                selectedValues.push('Pisciner');
+            }
+
+            // Store the data in localStorage
+            localStorage.setItem('eventTitle', eventTitle);
+            localStorage.setItem('welcomeIntro', welcomeIntro);
+            localStorage.setItem('selectedValues', JSON.stringify(selectedValues));
+
+
+            // Redirect to event_details
+            window.location.href = 'event_details.html';
+        }
+          </script>
+        <script>
+          //Create min and max for Group
+            function toggleTextboxes(checkboxId) {
+            const checkbox = document.getElementById(checkboxId);
+            const membersInput = document.getElementById(checkboxId + "MembersInput");
+            const maxMembersInput = document.getElementById(checkboxId + "MaxMembers");
+            const minMembersInput = document.getElementById(checkboxId + "MinMembers");
+
+            if (checkbox.checked) {
+              const membersInput = document.getElementById(checkboxId + "MembersInput");
+
+              if (membersInput) {
+                membersInput.style.display = "block";
+              } else {
+                // Handle the case where the input element does not exist.
+              }
+              maxMembersInput.setAttribute("required", "required");
+              minMembersInput.setAttribute("required", "required");
+            } else {
+              const membersInput = document.getElementById(checkboxId + "MembersInput");
+
+              if (membersInput) {
+                membersInput.style.display = "none";
+              } else {
+                // Handle the case where the input element does not exist.
+              }
+
+              maxMembersInput.removeAttribute("required");
+              minMembersInput.removeAttribute("required");
+            }
+            }
+        </script>
+        <script>
+            tinymce.init({
+              selector: 'textarea',
+              plugins: 'ai tinycomments mentions anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed permanentpen footnotes advtemplate advtable advcode editimage tableofcontents mergetags powerpaste tinymcespellchecker autocorrect a11ychecker typography inlinecss',
+              toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | align lineheight | tinycomments | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+              tinycomments_mode: 'embedded',
+              tinycomments_author: 'Author name',
+              mergetags_list: [
+                { value: 'First.Name', title: 'First Name' },
+                { value: 'Email', title: 'Email' },
+              ],
+              ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
+            });
+          </script>
     </div>
-  </body>
+
+    <!-- Include Bootstrap JS (optional) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
 </html>
+
+
+<!-- <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" /> -->
