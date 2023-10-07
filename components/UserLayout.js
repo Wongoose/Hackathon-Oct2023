@@ -130,8 +130,8 @@ function Header() {
                                     <img src={image} className="rounded-circle" style={{width: "30px"}} alt="Avatar" />
                             </ul>
                             <form className="d-flex" role="search">
-                                <select onChange={onChangeTheme} class="form-select" aria-label="Default select example">
-                                    { themes.map(x=> <option key={`theme-${x}`} selected={x.toLowerCase()==x}>{x}</option>)}
+                                <select defaultValue="sketchy" onChange={onChangeTheme} className="form-select" aria-label="Default select example">
+                                    { themes.map(x=> <option key={`theme-${x}`}>{x}</option>)}
                                     
                                 </select>
                                 <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />

@@ -72,7 +72,7 @@ export default function Page() {
                     style={{ width: "100%", paddingTop: "8px", paddingBottom: "8px", marginBottom: "5px" }}>Confirm all rewards</button>
                 <button id="cancel-btn"
                     style={{ backgroundColor: "transparent", border: "none", width: "100%", paddingTop: "8px", paddingBottom: "8px" }}
-                    formmethod="dialog">Cancel</button>
+                    formMethod="dialog">Cancel</button>
             </div>
         </>
 
