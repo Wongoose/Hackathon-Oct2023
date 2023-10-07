@@ -31,11 +31,14 @@ export default function Page() {
     return (
         <>
             <div className="container">
-                <h1 id="eventName" className="mt-5">Event Name {event[0].name}</h1>
+                <h1 id="eventName" className="mt-5">{event[0].name}</h1>
                 {/* <!-- Event Introduction Section --> */}
-                <div className="description-line">
-                    <h4 id="eventIntro">Welcome to 42KL&apos;s first-ever in-house 48hr Hackathon, aimed at protecting, maintaining, and elevating the integrity of 42&apos;s peer-to-peer learning environment. This also allows Cadets who have never participated in a Hackathon to experience what a Hackathon is.</h4>
-                </div>
+                {
+                    event[0].intro &&
+                    <div className="description-line">
+                        <h4 id="eventIntro" dangerouslySetInnerHTML={{ __html: event[0].intro }}></h4>
+                    </div>
+                }
                 {/* <!-- Progress Bar Section --> */}
                 <div className="progress" role="progressbar" aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
                     <div className="progress-bar" style={{ width: "75%" }}></div>
@@ -45,17 +48,17 @@ export default function Page() {
                 <h2><b>Event Details:</b></h2>
                 <div className="description-line">
                     <h4><b>Date :</b>
-                        <span id="starDate"> 6th October </span>
-                        <span id="starTime"> 4:00 PM </span> to
-                         <span id="endtDate"></span>
-                        <span>9th October </span>
-                        <span id="EndTime">6:00 PM</span>
+                        <span id="starDate"> {event[0].startdate} </span>
+                        <span id="starTime"> {event[0].starttime} </span>
+                        to&nbsp;
+                        <span id="endtDate">{event[0].enddate} </span>
+                        <span id="EndTime">{event[0].endtime}</span>
                     </h4>
                     <h4>
                         <b>Briefing :</b>
                         <span id="dateBriefing"> 6th October </span>
                         Time <span id="TimeBriefing"> 2:30 PM </span> </h4>
-                    <h4><b>Location :</b> <span id="location"> 42KL Ground Floor, Lobby Area (Onsite) </span></h4>
+                    <h4><b>Location :</b> <span id="location"> {event[0].location} </span></h4>
                 </div>
                 <br />
                 {/* <!-- Who Can Participate Section --> */}
@@ -67,7 +70,7 @@ export default function Page() {
                 {/* <!-- Event Description Section --> */}
                 <h2><b>Event Description:</b></h2>
                 <div className="description-line">
-                    <h4 id="eventDescription">The Peer-Defence Hackathon is for 42KL Cadets to join forces and contribute to the protection, maintenance, or elevation of the integrity that defines our peer-to-peer learning ecosystem. This event offers a practical chance to work together, come up with ideas, and develop solutions that safeguard the integrity of the learning experiences at 42KL.</h4>
+                    <h4 id="eventDescription" dangerouslySetInnerHTML={{ __html: event[0].details }}></h4>
                 </div>
                 <br />
                 {/* <!-- References Section --> */}
@@ -87,6 +90,8 @@ export default function Page() {
                 {/* <h2><b>Registrate:</b></h2> */}
                 <div className="d-grid gap-6">
                     <Link href={'/register/' + router.query.event_id} className="btn btn-secondary btn-lg">Register</Link>
+                    <Link href={'/participants/' + router.query.event_id} className=" mt-2">Participants</Link>
+                    <Link href={'/participants/' + router.query.event_id} className=" mt-2">Result</Link>
                 </div>
             </div>
             <br />
