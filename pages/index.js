@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { Inter } from 'next/font/google'
 // import styles from '@/styles/Home.module.css'
 import { useEffect } from 'react';
+import Link from 'next/link'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -89,7 +90,7 @@ export default function Home() {
           <h1>42 Event</h1>
           <p className="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
           <p className="lead">
-            <a href="/api/auth" className="btn btn-lg btn-light fw-bold border-white bg-white">Sign In</a>
+            <Link href="/api/auth" className="btn btn-lg btn-light fw-bold border-white bg-white">Sign In</Link>
           </p>
         </main>
 
