@@ -13,34 +13,63 @@ function getCookie(name) {
     if (parts.length === 2) return parts.pop().split(';').shift();
 }
 
+// ==========================
 export default function Page() {
     const router = useRouter();
     const [event, setEvent] = useState();
 
-    // async function handleSubmit(event) {
-    //     event.preventDefault();
-    //     const body = new FormData(event.target);
-    //     const post = {
-    //         event_id: event.target.elements['event_id'],
-    //         members: [
+    async function handleSubmit(event) {
+        event.preventDefault();
+        const body = new FormData(event.target);
+        const post = {
+            event_id: router.query.event_id,
+    
+            teamName: event.target.elements['teamName'].value,
+            members: []
+            
+        };
+        const memberName1 = document.querySelector('#MemberName1').value;
+        const memberId1 = document.querySelector('#Memberid1').value;
+        const memberName2 = document.querySelector('#MemberName2').value;
+        const memberId2 = document.querySelector('#Memberid2').value;
+        const memberName3 = document.querySelector('#MemberName3').value;
+        const memberId3 = document.querySelector('#Memberid3').value;
 
-    //         ]
-    //     };
-    //     // for () {
-    //     //     post.members.push()
-    //     // }
-    //     const res = await fetch('/api/register', {
-    //         body: JSON.stringify(Object.fromEntries(body)),
-    //         // body: JSON.stringify(post),
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         },
-    //     })
-    //     const data = await res.json()
-    //     console.log(data)
-    //     router.push("/events/" + event.target.elements['event_id']);
-    // }
+        // for (let i = 1; i < 4; ++i) {
+        //     const name = document.querySelector('#MemberName' + i).value;
+        //     const id = document.querySelector('#MemberId' + i).value;
+        //     post.members.push({ name, id });
+        // }
+
+        post.members.push(memberName1, memberId1, memberName2, memberId2, memberName3, memberId3);
+
+        // const handleAddMember = () => {
+        //     // Create a new member object with empty name and intraId
+        //     const newMember = {
+        //         name: '',
+        //         intraId: '',
+        //     };
+
+        //     // Add the new member to the members array
+        //     setMembers([...members, newMember]);
+        // };
+        // for () {
+        //     post.members.push()
+        // }
+        const res = await fetch('/api/register', {
+            // body: JSON.stringify(Object.fromEntries(body)),
+            body: JSON.stringify(post),
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        const data = await res.json()
+        console.log(data)
+        router.push("/events/" + router.query.event_id);
+    }
+
+    // ==================
 
     useEffect(() => {
         console.log(getCookie('login'));
@@ -88,16 +117,16 @@ export default function Page() {
                     <br />
                     <div className="row">
                         <div className="col-md-6">
-                            <input type="text" className="form-control" id="MemberName2" placeholder="team Member Name" />
+                            <input type="text" className="form-control" id="MemberName3" placeholder="team Member Name" />
                         </div>
                         <div className="col-md-6">
-                            <input type="text" className="form-control" id="Memberid2" placeholder="team Member Intra Id" />
+                            <input type="text" className="form-control" id="Memberid3" placeholder="team Member Intra Id" />
                         </div>
                     </div>
 
                     <br />
                     <div className="d-grid gap-6">
-                        <button id="addMember" className="btn btn-primary" type="button">Submit Registration</button>
+                        <button id="addMember" className="btn btn-primary" >Submit Registration</button>
                     </div>
                     <br />
                 </div>
