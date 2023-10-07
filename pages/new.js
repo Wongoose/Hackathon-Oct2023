@@ -129,19 +129,19 @@ export default function Page() {
 
                             <div className="col-md-3 mb-3">
                                 {/* <label for="startDate" className="form-label">Sart</label> */}
-                                <input type="date" className="form-control" id="startDate" name="startDate" placeholder="Start Date" />
+                                <input type="date" className="form-control" id="startDate" name="startDate" placeholder="Start Date" required />
                             </div>
                             <div className="col-md-3 mb-3">
                                 {/* <label for="startTime" className="form-label">Start Time:</label> */}
-                                <input type="time" className="form-control" id="startTime" name="startTime" placeholder="Start Time" />
+                                <input type="time" className="form-control" id="startTime" name="startTime" placeholder="Start Time" required/>
                             </div>
                             <div className="col-md-3 mb-3">
                                 {/* <label for="endDate" className="form-label">End Date:</label> */}
-                                <input type="date" className="form-control" id="endDate" name="endDate" placeholder="End Date" />
+                                <input type="date" className="form-control" id="endDate" name="endDate" placeholder="End Date" required/>
                             </div>
                             <div className="col-md-3 mb-3">
                                 {/* <label for="endTime" className="form-label">End Time:</label> */}
-                                <input type="time" className="form-control" id="endTime" name="endTime" placeholder="End Time" />
+                                <input type="time" className="form-control" id="endTime" name="endTime" placeholder="End Time" required/>
                             </div>
                         </div>
                         <div className="mb-3">
@@ -183,18 +183,18 @@ export default function Page() {
                             <div className="col-md-6">
                                 <div className="border p-2">
                                     <div className="form-check">
-                                        <input name="team" className="form-check-input" type="checkbox" id="teamCheckbox" name="registrationType[]" value="Team" onChange={() => setAllowTeam(x => !x)} checked={allowTeam} />
+                                        <input name="asTeam" className="form-check-input" type="checkbox" id="teamCheckbox" value="true" onChange={() => setAllowTeam(x => !x)} checked={allowTeam} />
                                         <label className="form-check-label" for="teamCheckbox">Team</label>
                                     </div>
                                     {
                                         allowTeam && <>
                                             <div className="form-group" id="teamMembersInput">
                                                 <label for="teamMaxMembers">Max Members:</label>
-                                                <input name="teammin" type="number" className="form-control" id="teamMaxMembers" name="teamMaxMembers" required />
+                                                <input type="number" className="form-control" id="teamMaxMembers" name="teamMaxMembers" min="1" required/>
                                             </div>
                                             <div className="form-group" id="teamMinMembersInput">
                                                 <label for="teamMinMembers">Min Members:</label>
-                                                <input name="teammax" type="number" className="form-control" id="teamMinMembers" name="teamMinMembers" required />
+                                                <input type="number" className="form-control" id="teamMinMembers" name="teamMinMembers" min="1" required />
                                             </div>
                                         </>
                                     }
@@ -203,7 +203,7 @@ export default function Page() {
                             <div className="col-md-6">
                                 <div className="border p-2">
                                     <div className="form-check">
-                                        <input name="lone" className="form-check-input" type="checkbox" id="loneWolfCheckbox" name="registrationType[]" value="Lone Wolf" />
+                                        <input name="asIndividual" className="form-check-input" type="checkbox" id="loneWolfCheckbox" value="true" />
                                         <label className="form-check-label" for="loneWolfCheckbox">
                                             Lone Wolf
                           </label>
