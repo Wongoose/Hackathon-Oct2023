@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useState } from "react";
-import Head from 'next/head'
-import Link from 'next/link'
+import Head from 'next/head';
+import Link from 'next/link';
 
 function getCookie(name) {
     if (typeof window === "undefined") return '';
@@ -9,6 +9,34 @@ function getCookie(name) {
     const parts = value.split(`; ${name}=`);
     if (parts.length === 2) return parts.pop().split(';').shift();
 }
+
+const themes = [
+'Default',
+'Cerulean',
+'Cosmo',
+'Cyborg',
+'Darkly',
+'Flatly',
+'Journal',
+'Litera',
+'Lumen',
+'Lux',
+'Materia',
+'Minty',
+'Morph',
+'Pulse',
+'Quartz',
+'Sandstone',
+'Simplex',
+'Sketchy',
+'Slate',
+'Solar',
+'Spacelab',
+'Superhero',
+'United',
+'Vapor',
+'Yeti',
+'Zephyr'];
 
 function Theme() {
     return <>
@@ -63,10 +91,14 @@ function Theme() {
 function Header() {
     const [login, setLogin] = useState(getCookie('login'));
     const [image, setImage] = useState(getCookie('image'));
+    const [theme, setTheme] = useState('sketchy');
+    function onChangeTheme(event) {
+        setTheme(event.target.value.toLowerCase());
+    }
     return (
         <>
             <Head>
-                <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.2/dist/sketchy/bootstrap.min.css" rel="stylesheet" />
+                <link href={`https://cdn.jsdelivr.net/npm/bootswatch@5.3.2/dist/${theme}/bootstrap.min.css`} rel="stylesheet" />
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer
                     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossOrigin="anonymous"></script>
             </Head>
@@ -98,6 +130,10 @@ function Header() {
                                     <img src={image} className="rounded-circle" style={{width: "30px"}} alt="Avatar" />
                             </ul>
                             <form className="d-flex" role="search">
+                                <select onChange={onChangeTheme} class="form-select" aria-label="Default select example">
+                                    { themes.map(x=> <option selected={x.toLowerCase()==x}>{x}</option>)}
+                                    
+                                </select>
                                 <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
                                 <button className="btn btn-outline-success" type="submit">Search</button>
                             </form>
@@ -133,7 +169,7 @@ function Footer() {
 export default function Page({ children }) {
 
     useEffect(() => {
-        document.querySelector('body').className = 'd-flex flex-column h-100';
+        document.querySelector('body').className = 'd-flex flex-column min-vh-100';
     }, []);
     return (
         <>

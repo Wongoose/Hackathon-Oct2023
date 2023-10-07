@@ -5,6 +5,7 @@ import React, { useRef } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import { useRouter } from "next/router";
 import Loading from '@/components/Loading';
+import Link from 'next/link'
 
 function getCookie(name) {
     const value = `; ${document.cookie}`;
@@ -83,14 +84,9 @@ export default function Page() {
                 </div>
                 <br />
                 {/* <!-- Registration Buttons Section --> */}
-                <h2><b>Registrate:</b></h2>
-                <div className="row justify-content-center">
-                    <div className="col-md-6 mb-3 flex">
-                        <button id="RegistrateTeam" className="btn btn-primary" type="button">Team</button>
-                    </div>
-                    <div className="col-md-6 mb-3 flex">
-                        <button id="RegistrateWolf" className="btn btn-primary" type="button">Lone Wolf</button>
-                    </div>
+                {/* <h2><b>Registrate:</b></h2> */}
+                <div className="d-grid gap-6">
+                    <Link href={'/register/' + router.query.event_id} className="btn btn-secondary btn-lg">Register</Link>
                 </div>
             </div>
             <br />

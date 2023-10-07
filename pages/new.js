@@ -86,7 +86,7 @@ export default function Page() {
                         <div className="row">
                             <div className="col-md-6">
                                 <div className="form-check form-switch">
-                                    <input name="cadet" className="form-check-input" type="checkbox" role="switch" id="cadets" checked />
+                                    <input name="cadet" className="form-check-input" type="checkbox" role="switch" id="cadets" />
                                     <label className="form-check-label" for="cadets">42KL Cadets</label>
                                 </div>
                             </div>
@@ -205,7 +205,7 @@ export default function Page() {
                                     <div className="form-check">
                                         <input name="asIndividual" className="form-check-input" type="checkbox" id="loneWolfCheckbox" value="true" />
                                         <label className="form-check-label" for="loneWolfCheckbox">
-                                            Lone Wolf
+                                            Individual
                           </label>
                                     </div>
                                 </div>
