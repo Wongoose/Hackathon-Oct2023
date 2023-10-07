@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Link from 'next/link'
 import UserLayout from '@/components/UserLayout';
+import Loading from '@/components/Loading';
 
 function getCookie(name) {
     const value = `; ${document.cookie}`;
@@ -18,13 +19,15 @@ const event_construct = (id,title) =>({id, title});
 
 export default function Page() {
     const [count, setCount] = useState(0);
-    const [events, setEvents] = useState([]);
+    const [events, setEvents] = useState();
     useEffect(() => {
-        console.log(getCookie('login'));
-        console.log(getCookie('image'));
+        // console.log(getCookie('login'));
+        // console.log(getCookie('image'));
         fetch('/api/events').then(r => r.json())
         .then(data => setEvents(data));
     }, []);
+    if (!events) return <Loading/>;
+    if (events.length ==0) return <h2>No event. Let&apos;s create one.</h2>
     return (
         <>
         <h1>event listing</h1>

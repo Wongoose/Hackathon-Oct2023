@@ -4,6 +4,7 @@ import Script from 'next/script';
 import React, { useRef } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import { useRouter } from "next/router";
+import Loading from '@/components/Loading';
 
 function getCookie(name) {
     const value = `; ${document.cookie}`;
@@ -24,7 +25,7 @@ export default function Page() {
             .then(data => setEvent(data));
         }
     }, [router.query.event_id]);
-    if (!event) return <h2>Loading...</h2>;
+    if (!event) return <Loading/>;
     if (event.length == 0) return <h2>Not Found</h2>;
     return (
         <>
