@@ -62,7 +62,7 @@ export default function Page() {
                 <div className="card" style={{ padding: "15px", marginBottom: "2rem" }}>
                     {
                         winners.length && winners.map((x, i) =>
-                            <p>{i + 1}. {x.login} (+ {x.rewards}) - {x.reason}</p>)
+                            <p key={'winner' + i}>{i + 1}. {x.login} (+ {x.rewards}) - {x.reason}</p>)
                     }
                     <p>1. zwong (+ eval points) - 1st place winner</p>
                     <p>2. schuah (+ blackhole days) - 2nd place winner</p>

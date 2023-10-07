@@ -81,19 +81,19 @@ function Header() {
                         <div className="collapse navbar-collapse" id="navbarCollapse">
                             <ul className="navbar-nav me-auto mb-2 mb-md-0">
                                 <li className="nav-item">
-                                    <Link className="nav-link active" aria-current="page" href="/events">Events</Link>
+                                    <Link className="nav-link" aria-current="page" href="/events">Events</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link className="nav-link active" aria-current="page" href="/new">Create</Link>
+                                    <Link className="nav-link" aria-current="page" href="/new">Create</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link className="nav-link active" aria-current="page" href="/result">Result</Link>
+                                    <Link className="nav-link " aria-current="page" href="/result">Result</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link" href="/api/logout">Logout</a>
+                                    <Link className="nav-link" href="/api/logout">Logout</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link disabled" aria-disabled="true" title={image}>{login}</a>
+                                    <Link className="nav-link" title={image} href={"https://profile.intra.42.fr/users/"+login} target="_blank">{login}</Link>
                                 </li>
                                     <img src={image} className="rounded-circle" style={{width: "30px"}} alt="Avatar" />
                             </ul>
