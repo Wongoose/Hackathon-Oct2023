@@ -42,10 +42,10 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## SQL
 
-CREATE TABLE IF NOT EXISTS user(
+CREATE TABLE IF NOT EXISTS account(
     login VARCHAR(200) PRIMARY KEY,
     image VARCHAR(200) NOT NULL,
-    is_staff INT NOT NULL,
+    is_staff BOOLEAN NOT NULL,
     cursus_id INT NOT NULL,
     coalition_id INT NOT NULL,
     coalition_pt INT NOT NULL,
@@ -89,9 +89,11 @@ CREATE TABLE IF NOT EXISTS team(
 CREATE TABLE IF NOT EXISTS member(
     id INT NOT NULL,
     event_id INT NOT NULL,
+    team_id INT NOT NULL,
     login VARCHAR(200) NOT NULL,
+    name VARCHAR(200) NOT NULL,
     created_on TIMESTAMP NOT NULL,
-    created_by VARCHAR(200) NOT NULL,
+    created_by VARCHAR(200) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS result(

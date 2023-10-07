@@ -16,6 +16,32 @@ function getCookie(name) {
 export default function Page() {
     const router = useRouter();
     const [event, setEvent] = useState();
+
+    // async function handleSubmit(event) {
+    //     event.preventDefault();
+    //     const body = new FormData(event.target);
+    //     const post = {
+    //         event_id: event.target.elements['event_id'],
+    //         members: [
+
+    //         ]
+    //     };
+    //     // for () {
+    //     //     post.members.push()
+    //     // }
+    //     const res = await fetch('/api/register', {
+    //         body: JSON.stringify(Object.fromEntries(body)),
+    //         // body: JSON.stringify(post),
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //         },
+    //     })
+    //     const data = await res.json()
+    //     console.log(data)
+    //     router.push("/events/" + event.target.elements['event_id']);
+    // }
+
     useEffect(() => {
         console.log(getCookie('login'));
         console.log(getCookie('image'));
@@ -30,7 +56,7 @@ export default function Page() {
     if (event.length == 0) return <h2>Not Found</h2>;
     return (
         <>
-            <form>
+            <form onSubmit={handleSubmit}>
                 {/* <!-- Header Section --> */}
                 <div className="container">
                     <h1 id="eventName" className="mt-5">Event Name</h1>
