@@ -131,7 +131,7 @@ function Header() {
                             </ul>
                             <form className="d-flex" role="search">
                                 <select onChange={onChangeTheme} class="form-select" aria-label="Default select example">
-                                    { themes.map(x=> <option selected={x.toLowerCase()==x}>{x}</option>)}
+                                    { themes.map(x=> <option key={`theme-${x}`} selected={x.toLowerCase()==x}>{x}</option>)}
                                     
                                 </select>
                                 <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
