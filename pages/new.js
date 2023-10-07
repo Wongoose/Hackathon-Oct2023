@@ -60,13 +60,13 @@ export default function Page() {
             <div className="container">
                 <h1 className="mt-5">Create Event</h1>
                 <form onSubmit={handleSubmit}>
-                    <div className="form-floating mb-3">
+                    {/* <div className="form-floating mb-3"> */}
                         <input name="name" type="text" className="form-control" id="floatingInput" placeholder="Enter Event Title" />
                         {/* <label for="floatingInput">Event Title</label> */}
-                    </div>
+                    {/* </div> */}
                     <div className="mb-3">
-                        {/* <textarea className="form-control" id="Welcome" rows="3" placeholder="Welcome Intro"></textarea> */}
-                        <Editor
+                        <textarea className="form-control" id="Welcome" rows="3" placeholder="Welcome Intro"></textarea>
+                        {/* <Editor
                             onInit={(evt, editor) => editorRef1.current = editor}
                             initialValue=""
                             init={{
@@ -78,7 +78,7 @@ export default function Page() {
                                 toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | align lineheight | tinycomments | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
                                 // content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
                             }}
-                        />
+                        /> */}
                     </div>
                     <div className="container">
                         <h2 className="mt-5">Who Can Participate:</h2>
@@ -144,10 +144,17 @@ export default function Page() {
                                 <input type="time" className="form-control" id="endTime" name="endTime" placeholder="End Time" required/>
                             </div>
                         </div>
-                        <div className="mb-3">
-                            {/* <label for="eventLocation" className="form-label">Location:</label> */}
-                            <input type="text" className="form-control" id="eventLocation" name="eventLocation" placeholder="Event Location" />
-                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <input type="text" className="form-control" id="eventLocation" name="eventLocation" placeholder="Event Location"/>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <input type="text" className="form-control" id="eventType" name="eventType" placeholder="Event Type"/>
+                            </div>
+                            </div>
+
+                       
                         <div className="mb-3">
                             {/* <textarea className="form-control" id="eventDescription" rows="3" placeholder="Event Description:"></textarea> */}
                             <Editor
@@ -165,25 +172,32 @@ export default function Page() {
                             />
                         </div>
                         Reference
-                <div className="row">
-                            <div className="col-md-6 mb-3">
+                        <div class="row">
+                            <div class="col-md-3 mb-3">
 
-                                {/* <label for="eventFiles">Event Files (Upload files):</label> */}
-                                <input type="file" className="form-control" id="eventFiles" name="eventFiles" accept=".pdf, .doc, .docx, .txt" multiple />
+                               
+                                <input type="file" className="form-control" id="eventFiles" name="eventFiles" accept=".pdf, .doc, .docx, .txt" multiple/>
 
                             </div>
-                            <div className="col-md-6 mb-3">
-                                {/* <label for="eventFiles">Event Files (Upload files):</label> */}
-                                <input type="text" className="form-control" id="event" name="eventLinks" />
+                            <div class="col-md-3 mb-3">
+                              
+                                <input type="text" className="form-control" id="eventLinksDes" name="eventLinksDes" placeholder="link Description"/>
                             </div>
-
+                            <div class="col-md-3 mb-3">
+                               
+                                <input type="text" className="form-control" id="eventLink" name="eventLink" placeholder="link"/>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <button className="btn btn-primary" type="button">+ More</button>
+                               
+                            </div>
                         </div>
                         Participance Type
                 <div className="row">
-                            <div className="col-md-6">
+                            <div class="col-md-6 mb-3">
                                 <div className="border p-2">
                                     <div className="form-check">
-                                        <input name="asTeam" className="form-check-input" type="checkbox" id="teamCheckbox" value="true" onChange={() => setAllowTeam(x => !x)} checked={allowTeam} />
+                                        <input name="asTeam" className="form-check-input" type="radio" id="teamCheckbox" value="true" onChange={() => setAllowTeam(x => !x)} checked={allowTeam} />
                                         <label className="form-check-label" for="teamCheckbox">Team</label>
                                     </div>
                                     {
@@ -200,21 +214,24 @@ export default function Page() {
                                     }
                                 </div>
                             </div>
-                            <div className="col-md-6">
+                            <div className="col-md-3">
                                 <div className="border p-2">
                                     <div className="form-check">
-                                        <input name="asIndividual" className="form-check-input" type="checkbox" id="loneWolfCheckbox" value="true" />
+                                        <input name="asTeam" className="form-check-input" type="radio" id="loneWolfCheckbox" value="false"/>
                                         <label className="form-check-label" for="loneWolfCheckbox">
                                             Individual
                           </label>
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-3 mb-3">
+                                <input type="number" className="form-control" id="maxGroups" name="joinLimit" placeholder="Join Limit" min="1"/>
+                            </div>
                         </div>
                         <br />
                         <div className="d-grid gap-6">
                             {/* <button className="btn btn-primary" type="button">Create Event</button> */}
-                            <button >Create Event</button>
+                            <button className="btn btn-secondary btn-lg">Create Event</button>
                         </div>
                         <br />
                     </div>
