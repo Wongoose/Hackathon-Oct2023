@@ -23,7 +23,7 @@ export default function Page() {
             fetch('/api/events/' + router.query.event_id).then(r => r.json())
             .then(data => setEvent(data));
         }
-    }, []);
+    }, [router.query.event_id]);
     if (!event) return <h2>Loading...</h2>;
     if (event.length == 0) return <h2>Not Found</h2>;
     return (
@@ -32,7 +32,7 @@ export default function Page() {
                 <h1 id="eventName" className="mt-5">Event Name {event[0].name}</h1>
                 {/* <!-- Event Introduction Section --> */}
                 <div className="description-line">
-                    <h4 id="eventIntro">Welcome to 42KL's first-ever in-house 48hr Hackathon, aimed at protecting, maintaining, and elevating the integrity of 42's peer-to-peer learning environment. This also allows Cadets who have never participated in a Hackathon to experience what a Hackathon is.</h4>
+                    <h4 id="eventIntro">Welcome to 42KL&apos;s first-ever in-house 48hr Hackathon, aimed at protecting, maintaining, and elevating the integrity of 42&apos;s peer-to-peer learning environment. This also allows Cadets who have never participated in a Hackathon to experience what a Hackathon is.</h4>
                 </div>
                 {/* <!-- Progress Bar Section --> */}
                 <div className="progress" role="progressbar" aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
