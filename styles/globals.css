@@ -76,7 +76,9 @@
   }
 
 
-
+  .card-footer {
+       display: flex;
+     }
 
   /*
 * Globals
