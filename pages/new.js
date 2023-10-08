@@ -8,6 +8,14 @@ import { useRouter } from "next/router";
 
 export default function Page() {
     const [allowTeam, setAllowTeam] = useState(false);
+
+    const handleLoneWolfCheckboxChange = () => {
+        setAllowTeam(false);
+    };
+
+    const handleTeamCheckboxChange = () => {
+        setAllowTeam(true);
+    };
     const editorRef1 = useRef(null);
     const editorRef2 = useRef(null);
     const router = useRouter()
@@ -17,6 +25,7 @@ export default function Page() {
         const body = new FormData(event.target);
         body.append('intro', editorRef1.current.getContent());
         body.append('details', editorRef2.current.getContent());
+  
         const res = await fetch('/api/event_create', {
             body: JSON.stringify(Object.fromEntries(body)),
             method: 'POST',
@@ -187,17 +196,17 @@ export default function Page() {
                                
                                 <input type="text" className="form-control" id="eventLink" name="eventLink" placeholder="link"/>
                             </div>
-                            <div class="col-md-3 mb-3">
+                            <div class="col-md-3 mb-2">
                                 <button className="btn btn-primary" type="button">+ More</button>
                                
-                            </div>
+                            </div>                           
                         </div>
                         Participance Type
                 <div className="row">
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-3 mb-3">
                                 <div className="border p-2">
                                     <div className="form-check">
-                                        <input name="asTeam" className="form-check-input" type="radio" id="teamCheckbox" value="true" onChange={() => setAllowTeam(x => !x)} checked={allowTeam} />
+                                        <input name="asTeam" className="form-check-input" type="radio" id="teamCheckbox" value="true" onChange={handleTeamCheckboxChange} />
                                         <label className="form-check-label" for="teamCheckbox">Team</label>
                                     </div>
                                     {
@@ -217,16 +226,23 @@ export default function Page() {
                             <div className="col-md-3">
                                 <div className="border p-2">
                                     <div className="form-check">
-                                        <input name="asTeam" className="form-check-input" type="radio" id="loneWolfCheckbox" value="false"/>
+                                        <input name="asTeam" className="form-check-input" type="radio" id="loneWolfCheckbox" value="false" onChange={handleLoneWolfCheckboxChange} />
                                         <label className="form-check-label" for="loneWolfCheckbox">
                                             Individual
                           </label>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3 mb-3">
+                            <div class="col-md-2 mb-3">
                                 <input type="number" className="form-control" id="maxGroups" name="joinLimit" placeholder="Join Limit" min="1"/>
                             </div>
+                            <div class="col-md-4 mb-3" id="uploadForm" enctype="multipart/form-data" title="Add Image">
+                                <div class="d-flex align-items-center">
+                                    <label for="imageInput">Add Thumbnail  &nbsp;</label>
+                                    <input type="file" id="imageInput" name="image" accept=".jpg, .jpeg, .png" title="Add Image" />
+                                </div>
+                            </div>
+
                         </div>
                         <br />
                         <div className="d-grid gap-6">
