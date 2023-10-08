@@ -240,3 +240,34 @@ ul.inline-list li {
     display: inline; /* Display list items inline */
     margin-right: 10px; /* Add spacing between list items (adjust as needed) */
 }
+
+
+/************************ participant list ************************/
+
+.description-line {
+  border: 1px solid #ccc;
+  /* Add a 1px solid gray border */
+  padding: 10px;
+  /* Add some padding for spacing */
+}
+
+.row {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.name {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.team-name {
+  font-size: 18px;
+  /* font-weight: bold; */
+}
