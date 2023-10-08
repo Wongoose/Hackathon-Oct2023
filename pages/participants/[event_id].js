@@ -1,3 +1,4 @@
+'use client';
 import UserLayout from '@/components/UserLayout';
 import { useState, useEffect } from 'react';
 import Script from 'next/script';
@@ -23,7 +24,7 @@ function Participant({image, team_id, team_name, login, name, created_on}) {
                     <img src={image??dummy} className="avatar" />
                 </div>
                 <div className="col-md-3">
-                    <h3 className="team-name">{name} | <Link href={'https://profile.intra.42.fr/users/' + login}>{login}</Link></h3>
+                    <h3 className="team-name">{name} | <Link href={'https://profile.intra.42.fr/users/' + login} target="_blank">{login}</Link></h3>
                 </div>
                 <div className="col-md-3">
                     <h3 className="team-name">{team_name??team_id}</h3>

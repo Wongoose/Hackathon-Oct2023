@@ -1,3 +1,4 @@
+'use client';
 import UserLayout from '@/components/UserLayout';
 import { useState, useEffect } from 'react';
 import Script from 'next/script';
@@ -6,15 +7,12 @@ import { Editor } from '@tinymce/tinymce-react';
 import { useRouter } from "next/router";
 import Loading from '@/components/Loading';
 import Link from 'next/link'
-
-function getCookie(name) {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
-}
+import Message from '@/components/Message'
+import useSession from '@/components/useSession';
 
 // ==========================
 export default function Page() {
+    const session = useSession();
     const router = useRouter();
     const [event, setEvent] = useState();
 
@@ -72,8 +70,6 @@ export default function Page() {
     // ==================
 
     useEffect(() => {
-        console.log(getCookie('login'));
-        console.log(getCookie('image'));
         if (!router.query.event_id) {
             setEvent([]);
         } else {
@@ -94,15 +90,15 @@ export default function Page() {
                     <br />
                     {/* <!-- Registration Buttons Section --> */}
                     <h2><b>Registrate:</b></h2>
-                    <input type="text" className="form-control" id="teamName" placeholder="Team Name" />
+                    <input type="text" className="form-control" id="teamName" placeholder="Team Name" required defaultValue={'Team ' + session.displayname} />
                     <br />
                     <div className="row">
 
                         <div className="col-md-6">
-                            <input type="text" className="form-control" id="MemberName1" placeholder="team Member Name" />
+                            <input type="text" className="form-control" id="MemberName1" placeholder="team Member Name" readOnly="readonly" value={session.displayname} />
                         </div>
                         <div className="col-md-6">
-                            <input type="text" className="form-control" id="Memberid1" placeholder="team Member Intra Id" />
+                            <input type="text" className="form-control" id="Memberid1" placeholder="team Member Intra Id" readOnly="readonly" value={session.login} />
                         </div>
                     </div>
                     <br />

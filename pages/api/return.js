@@ -54,6 +54,7 @@ export default async function handler(req, res) {
             `access_token=${access_token}; Path=/; Max-Age=${expires_in}`,
             `login=${data.login}; Path=/; Max-Age=${expires_in}`,
             `image=${data.image.versions.small}; Path=/; Max-Age=${expires_in}`,
+            `displayname=${data.displayname}; Path=/; Max-Age=${expires_in}`,
             `staff=${data['staff?']}; Path=/; Max-Age=${expires_in}`,
             ]
         );
