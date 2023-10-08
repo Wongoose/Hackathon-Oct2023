@@ -20,10 +20,14 @@ export default function Page() {
     const editorRef2 = useRef(null);
     const router = useRouter()
 
+    const onOptionChange = e => {
+        setAllowTeam(e.target.value)
+        console.log('team is ', e.target.value);
+    }
+
     async function handleSubmit(event) {
         event.preventDefault();
         const body = new FormData(event.target);
-        body.append('intro', editorRef1.current.getContent());
         body.append('details', editorRef2.current.getContent());
   
         const res = await fetch('/api/event_create', {
@@ -74,7 +78,7 @@ export default function Page() {
                         {/* <label for="floatingInput">Event Title</label> */}
                     {/* </div> */}
                     <div className="mb-3">
-                        <textarea className="form-control" id="Welcome" rows="3" placeholder="Welcome Intro"></textarea>
+                        <textarea className="form-control" id="Welcome" rows="3" placeholder="Welcome Intro" name="intro"></textarea>
                         {/* <Editor
                             onInit={(evt, editor) => editorRef1.current = editor}
                             initialValue=""
@@ -210,7 +214,7 @@ export default function Page() {
                                         <label className="form-check-label" for="teamCheckbox">Team</label>
                                     </div>
                                     {
-                                        allowTeam && <>
+                                        allowTeam=='true' && <>
                                             <div className="form-group" id="teamMembersInput">
                                                 <label for="teamMaxMembers">Max Members:</label>
                                                 <input type="number" className="form-control" id="teamMaxMembers" name="teamMaxMembers" min="1" required />

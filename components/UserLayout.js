@@ -2,13 +2,7 @@
 import { useEffect, useState } from "react";
 import Head from 'next/head';
 import Link from 'next/link';
-
-function getCookie(name) {
-    if (typeof window === "undefined") return '';
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
-}
+import useSession from "./useSession";
 
 const themes = [
 'Default',
@@ -89,8 +83,7 @@ function Theme() {
 }
 
 function Header() {
-    const [login, setLogin] = useState(getCookie('login'));
-    const [image, setImage] = useState(getCookie('image'));
+    const session = useSession()
     const [theme, setTheme] = useState('sketchy');
     function onChangeTheme(event) {
         setTheme(event.target.value.toLowerCase());
@@ -98,6 +91,8 @@ function Header() {
     return (
         <>
             <Head>
+                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+                 integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
                 <link href={`https://cdn.jsdelivr.net/npm/bootswatch@5.3.2/dist/${theme}/bootstrap.min.css`} rel="stylesheet" />
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer
                     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossOrigin="anonymous"></script>
@@ -119,23 +114,24 @@ function Header() {
                                     <Link className="nav-link" aria-current="page" href="/new">Create</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link className="nav-link " aria-current="page" href="/result">Result</Link>
-                                </li>
-                                <li className="nav-item">
                                     <Link className="nav-link" href="/api/logout">Logout</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link className="nav-link" title={image} href={"https://profile.intra.42.fr/users/"+login} target="_blank">{login}</Link>
+                                    
                                 </li>
-                                    <img src={image} className="rounded-circle" style={{width: "30px"}} alt="Avatar" />
+                                    
                             </ul>
                             <form className="d-flex" role="search">
+                                <Link className="nav-link p-0 mr-4" title={`${session.displayname} | ${session.login}`} href={"https://profile.intra.42.fr/users/" + session.login} target="_blank">
+                                    <img src={session.image} className="rounded-circle" style={{ height: '40px' }} alt="{session.login}" />
+                                </Link>
+                                &nbsp;&nbsp;&nbsp;
+                                {/* <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                                <button className="btn btn-outline-success" type="submit">Search</button> */}
                                 <select defaultValue="sketchy" onChange={onChangeTheme} className="form-select" aria-label="Default select example">
                                     { themes.map(x=> <option key={`theme-${x}`}>{x}</option>)}
                                     
                                 </select>
-                                <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                                <button className="btn btn-outline-success" type="submit">Search</button>
                             </form>
                         </div>
                     </div>

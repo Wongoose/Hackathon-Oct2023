@@ -2,6 +2,7 @@ import { sql } from "@vercel/postgres";
 
 export default async function handler(req, res) {
     let teamId;
+    const login = req.cookies.login;
     console.log('post', req.body);
     if (req.body) {
         const { rows, ...result } = await sql`
@@ -12,7 +13,7 @@ export default async function handler(req, res) {
             ${req.body.teamName},
             ${req.body.members.length / 2},
             to_timestamp(${Date.now() / 1000}),
-            'skoh'
+            ${login}
         ) returning id;`;
         console.log(result);
         res.status(200).json(rows);
@@ -23,6 +24,7 @@ export default async function handler(req, res) {
         return
     }
 
+    let memberCount = 0;
     for (let i = 0; i < req.body.members.length; i += 2) {
         const member_name = req.body.members[i];
         const member_login = req.body.members[i + 1];
@@ -36,10 +38,12 @@ export default async function handler(req, res) {
             ${member_login},
             ${member_name},
             to_timestamp(${Date.now() / 1000}),
-            'skoh'
+            ${login}
         ) returning id;`;
+        ++memberCount;
         console.log(result);
     }
+    const updateResult = await sql`update event set total_ppl = total_ppl  + ${memberCount} where id = ${req.body.event_id};`;
     res.status(200).json(teamId); // [{"id":1}]
 
     // curl -d "name=hello&status=1" http://localhost:3000/api/event_create

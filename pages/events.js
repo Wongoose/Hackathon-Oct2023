@@ -6,26 +6,29 @@ import Loading from '@/components/Loading';
 import Message from '@/components/Message'
 import Link from 'next/link'
 
-function EventCard({data}) {
+function EventCard({ data }) {
     return (
         <div className="col-md-4 mb-4">
             <div className="card" style={{ width: "18rem" }}>
-                <img src="images/Events2.jpg" className="card-img-top" alt="..." />
+                {/* <img src="images/Events2.jpg" className="card-img-top" alt="..." /> */}
                 <div className="card-body">
                     <h5 className="card-title">{data.name}</h5>
-                    <p className="card-text" dangerouslySetInnerHTML={{ __html: data.intro}} />
+                    <p className="card-text" dangerouslySetInnerHTML={{ __html: data.intro }} />
                     <Link href={`/events/${data.id}`} className="btn btn-primary">Go somewhere</Link>
                 </div>
                 <div className="card-footer" >
                     <div className="col-md-6">
-                        <p>On Going</p>
+                        <p>{data.startdate + ' ' + data.starttime}</p>
                     </div>
                     <div className="col-md-6 text-end">
-                        <p style={{ display: "inline" }}>3/10</p>
+                        {
+                            (data.total_ppl > 0) &&
+                            <p style={{ display: "inline" }}>{data.total_ppl} {(data.joinlimit ?? 4242) == 4242 ? '' : ' / ' + data.joinlimit}</p>
+                        }
                     </div>
                 </div>
                 <div className="position-absolute top-0 end-0 p-2">
-                    <span className="badge rounded-pill bg-dark text-light">Coalition</span>
+                    <span className="badge rounded-pill bg-dark text-light">{data.eventtype}</span>
                 </div>
             </div>
         </div>
@@ -54,12 +57,28 @@ export default function Page() {
                 <br />
                 {/* <!-- Event Introduction Section --> */}
                 <div className="container">
+                    <h2>Active Events</h2>
                     <div className="row">
                         {/* <!-- Card content --> */}
-                        {events.map(x => <EventCard data={x} key={x.id} />)}
+                        {events.filter(x => (new Date(x.enddate + ' 23:59')) >= new Date()).map(x => <EventCard data={x} key={x.id} />)}
                     </div>
                 </div>
+
+                {
+                    events.some(x => (new Date(x.enddate + ' 23:59')) < new Date()) && <>
+                        <hr />
+
+                        <div className="container">
+                            <h2>Past Events</h2>
+                            <div className="row">
+                                {/* <!-- Card content --> */}
+                                {events.filter(x => (new Date(x.enddate + ' 23:59')) < new Date()).map(x => <EventCard data={x} key={x.id} />)}
+                            </div>
+                        </div>
+                    </>
+                }
             </div>
+
         </>
     );
 }
