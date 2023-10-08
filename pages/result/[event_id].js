@@ -94,7 +94,7 @@ export default function Page() {
             <div className="card" style={{ padding: "15px", marginBottom: "2rem" }}>
                 {
                     winners.length == 0 ? <p>No Winner yet. You could be the winner.</p> : winners.map((x, i) =>
-                        <p>{i + 1}. {x.name}&nbsp;
+                        <p key={`win${i}`}>{i + 1}. {x.name}&nbsp;
                             ({x.evalPoints ? x.evalPoints + " eval points," : ""}&nbsp;
                             {x.bhDays ? x.bhDays + " blackhole days," : ""}&nbsp;
                             {x.currency ? x.currency + " currency," : ""} {x.title})&nbsp;

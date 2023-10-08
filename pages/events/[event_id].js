@@ -96,7 +96,7 @@ export default function Page() {
                         
                         event[0].login && 
                         <>
-                            <h4 className="text-center">You're registered. Enjoy the event</h4>
+                            <h4 className="text-center">You&apos;re registered. Enjoy the event</h4>
                         <Link href={'/submit/' + router.query.event_id} className="btn btn-secondary btn-lg mb-2">Submit...</Link>
                         </>
                     }
