@@ -22,6 +22,7 @@ export default function Page() {
 
     function onSubmitSearch(event) {
         event.preventDefault();
+        document.getElementById("reason").reset;
         setSelected(event.target.elements['search'].value)
     }
 
@@ -30,31 +31,38 @@ export default function Page() {
         evalPoint == 0 ? setEvalPoint(3) : setEvalPoint(0);
     }
 
-    // NEXT: Add validation and use form inputs (eval points, blackhole days)
     // NEXT: Reset
     function addWinnerToList(event) {
         event.preventDefault();
-        const reason = document.getElementById("reason").value;
-        setWinners([...winners, { "name": selected, "reason": reason }]);
+        setWinners([...winners,
+             { "name": selected,
+              "evalPoints": event.target.elements['evalPoints'].checked,
+              "bhDays": event.target.elements['bhDays'].checked,
+              "currency": event.target.elements['currency'].checked,
+              "title": event.target.elements['title'].checked,
+              "reason": event.target.elements['reason'].value,
+             }]);
     }
 
     useEffect(() => {
         //participants = await fetch('/api/getparticiapintaa')
 
         // Add dummy users in datalist
-        const rewardSearchInput = document.getElementById("reward-search");
-        rewardSearchInput.setAttribute("list", "user-datalist");
         let dataList = document.createElement("datalist");
-        dataList.style.backgroundColor = "FFFFFF"
         dataList.id = "user-datalist";
-
-        rewardSearchInput.append(dataList);
+        dataList.style.backgroundColor = "FFFFFF"
 
         for (let i = 0; i < 10; i++) {
             let addOption = document.createElement("option");
             addOption.append(tempUsers[i]);
             dataList.append(addOption);
         }
+        
+        const rewardSearchInput = document.getElementById("reward-search");
+        rewardSearchInput.setAttribute("list", "user-datalist"); // linking to 2nd attribute datalist ID
+
+        rewardSearchInput.append(dataList); // append the datalist to input box
+
     }, []);
 
 
@@ -76,22 +84,22 @@ export default function Page() {
                             <div className="card" style={{ padding: "15px", marginBottom: "2rem" }}>
                                 <div className="row" style={{ paddingLeft: "1rem" }}>
                                     <input type="checkbox" name="evalPoints" checked={evalPoint != 0} style={{ color: "black" }} onClick={evalToggle} />
-                                    <p style={{ "marginLeft": "15px" }}>+ Eval points</p>
+                                    <p style={{ "marginLeft": "15px" }}>+ 3 Eval points</p>
                                 </div>
                                 <div className="row" style={{ paddingLeft: "1rem" }}>
                                     <input type="checkbox" name="bhDays" style={{ color: "black" }} />
-                                    <p style={{ marginLeft: "15px" }}>+ Blackhole days</p>
+                                    <p style={{ marginLeft: "15px" }}>+ 5 Blackhole days</p>
                                 </div>
                                 <div className="row" style={{ paddingLeft: "1rem" }} >
                                     <input type="checkbox" name="currency" style={{ color: "black" }} />
-                                    <p style={{ marginLeft: "15px" }}>+ Currency ($)</p>
+                                    <p style={{ marginLeft: "15px" }}>+ 200 Currency ($)</p>
                                 </div>
                                 <div className="row" style={{ paddingLeft: "1rem" }}>
                                     <input type="checkbox" name="title" style={{ color: "black" }} />
                                     <p style={{ marginLeft: "15px" }}>+ Hackathon winner title</p>
                                 </div>
                                 <div className="form-floating mb-3" style={{ marginTop: "10px" }}>
-                                    <input type="text" className="form-control" id="reason" />
+                                    <input type="text" name="reason" className="form-control" id="reason" />
                                     <label for="reason">Reason for reward</label>
                                 </div>
                                 <button id="reward-confirm-btn"
@@ -104,7 +112,8 @@ export default function Page() {
                 <div className="card" style={{ padding: "15px", marginBottom: "2rem" }}>
                     {
                         winners.length == 0 ? <p></p> : winners.map((x, i) =>
-                            <p>{i + 1}. {x.name} ({x.rewards}) - {x.reason}</p>)
+                            <p>{i + 1}. {x.name} ({x.evalPoints ? "3 eval points," : ""} {x.bhDays ? "5 blackhole days," : ""} {x.currency ? "200 currency," : ""} {x.title ? "winner title" : ""})
+                             - {x.reason}</p>)
                     }
                 </div>
                 <button id="reward-confirm-btn"
