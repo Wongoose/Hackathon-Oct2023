@@ -89,9 +89,11 @@ export default function Page() {
                 {/* <!-- Registration Buttons Section --> */}
                 {/* <h2><b>Registrate:</b></h2> */}
                 <div className="d-grid gap-6">
-                    <Link href={'/register/' + router.query.event_id} className="btn btn-secondary btn-lg">Register</Link>
+                    <Link href={'/register/' + router.query.event_id} className="btn btn-secondary btn-lg mb-2">Register</Link>
+                    <Link href={'/submit/' + router.query.event_id} className="btn btn-secondary btn-lg mb-2">Submit</Link>
+                    {/* <Link href={'/feedback/' + router.query.event_id} className="btn btn-secondary btn-lg mb-2">Feedback</Link> */}
                     <Link href={'/participants/' + router.query.event_id} className=" mt-2">Participants</Link>
-                    <Link href={'/participants/' + router.query.event_id} className=" mt-2">Result</Link>
+                    <Link href={'/result/' + router.query.event_id} className=" mt-2">Result</Link>
                 </div>
             </div>
             <br />
