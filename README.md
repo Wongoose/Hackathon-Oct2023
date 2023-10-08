@@ -73,6 +73,9 @@ CREATE TABLE IF NOT EXISTS event(
     intro TEXT NOT NULL,
     details TEXT NOT NULL,
     closing_on TIMESTAMP NOT NULL,
+    eventType VARCHAR(200),
+    joinLimit INT,
+    total_ppl INT DEFAULT 0 NOT NULL,
     created_on TIMESTAMP NOT NULL,
     created_by VARCHAR(200) NOT NULL
 );

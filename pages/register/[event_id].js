@@ -122,7 +122,7 @@ export default function Page() {
 
                     <br />
                     <div className="d-grid gap-6">
-                        <button id="addMember" className="btn btn-primary" >Submit Registration</button>
+                        <button id="addMember" className="btn btn-primary" >Confirm Registration</button>
                     </div>
                     <br />
                 </div>
